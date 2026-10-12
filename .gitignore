@@ -1,0 +1,9 @@
+*.gcda
+*.jsonl
+*.pyc
+__pycache__/
+build-*/
+data/
+data/*.bin
+data/*.txt
+logs/

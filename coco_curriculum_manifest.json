@@ -1,0 +1,381 @@
+{
+  "title": "Coco public-data curriculum manifest",
+  "version": "1.0",
+  "prepared_on": "2026-09-22",
+  "status": "proposed_not_executed",
+  "source_pages_reviewed": true,
+  "dataset_archives_downloaded": false,
+  "adapters_implemented_or_tested": false,
+  "thresholds_are_proposed_not_published": true,
+  "architecture_requirement": "Use Coco native learning; no requirement for transformer, backpropagation, semantic parser or external planner.",
+  "source_registry": [
+    {
+      "id": "S1",
+      "name": "Dyna-bAbI",
+      "url": "https://github.com/ronentk/dyna-babi-kit",
+      "kind": "generator_and_pregenerated_data",
+      "priority": "core",
+      "license_note": "Repository lists CC0-1.0. Verify terms separately for inherited original bAbI downloads.",
+      "adapter": "Stream story observations; control entity vocabulary and skill mixtures; keep solver/support annotations teacher-only.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S2",
+      "name": "Original bAbI task generator",
+      "url": "https://github.com/facebookarchive/bAbI-tasks",
+      "kind": "legacy_generator_and_dataset_reference",
+      "priority": "diagnostic",
+      "license_note": "Check terms of the exact dataset archive separately from generator code.",
+      "adapter": "Use task definitions and public data for coverage not supplied by the selected Dyna-bAbI configuration.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S3",
+      "name": "CLEVR and CoGenT",
+      "url": "https://cs.stanford.edu/people/jcjohns/clevr/",
+      "kind": "static_dataset_with_scene_graphs_and_programs",
+      "priority": "core",
+      "license_note": "Data: CC BY 4.0.",
+      "adapter": "Use no-image archives; verbalize scene graphs; programs and answers are teacher-only. This is a text adaptation, not official visual CLEVR.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S4",
+      "name": "COGS",
+      "url": "https://github.com/najoungkim/COGS",
+      "kind": "semantic_parsing_dataset",
+      "priority": "diagnostic",
+      "license_note": "Repository lists MIT. Record the exact data snapshot.",
+      "adapter": "Use corrected data, and distinguish in-distribution test.tsv from generalization gen.tsv. Formal targets are an optional supervised diagnostic.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S5",
+      "name": "SCAN",
+      "url": "https://github.com/brendenlake/SCAN",
+      "kind": "command_to_action_dataset",
+      "priority": "diagnostic",
+      "license_note": "Repository LICENSE is BSD 3-clause.",
+      "adapter": "Keep official length and add-primitive splits separate; this tests command composition rather than world-state grounding.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S6",
+      "name": "TextWorld",
+      "url": "https://github.com/microsoft/TextWorld",
+      "kind": "interactive_generator_and_environment",
+      "priority": "core",
+      "license_note": "TextWorld code: MIT. Dependencies have separate licenses; do not infer asset terms from code.",
+      "adapter": "Generate worlds and collect rollouts; learner gets observations, own actions and feedback, not hidden facts, walkthroughs or oracle plans.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S7",
+      "name": "LLM-BabyBench",
+      "url": "https://huggingface.co/datasets/salem-mbzuai/LLM-BabyBench",
+      "kind": "offline_grounded_reasoning_dataset",
+      "priority": "optional_event_probe",
+      "license_note": "Dataset card lists MIT.",
+      "adapter": "Start with Predict; create grouped splits using level and seed metadata, plus task-family holdouts. Do not assume the displayed train partition is a complete evaluation protocol.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S8",
+      "name": "BabyAI in MiniGrid",
+      "url": "https://minigrid.farama.org/environments/babyai/",
+      "kind": "interactive_environment",
+      "priority": "optional_embodied_branch",
+      "license_note": "Review the pinned MiniGrid code and asset licenses.",
+      "adapter": "Preserve the selected observation regime when serializing to text; do not expose the full grid in a partial-observation evaluation.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S9",
+      "name": "ProPara",
+      "url": "https://github.com/allenai/propara",
+      "kind": "annotated_natural_process_text",
+      "priority": "natural_language_transfer",
+      "license_note": "Repository lists Apache 2.0; verify coverage of the exact data artifact before ingestion.",
+      "adapter": "Use sentence-prefix state tracking; withhold future sentences and evaluation state annotations.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S10",
+      "name": "Schema-Guided Dialogue and SGD-X",
+      "url": "https://github.com/google-research-datasets/dstc8-schema-guided-dialogue",
+      "kind": "annotated_task_dialogue_and_schema_variants",
+      "priority": "core_late",
+      "license_note": "Dataset: CC BY-SA 4.0.",
+      "adapter": "Reconstruct turns and service results; create a mock backend for interactive task verification. SGD-X varies schemas, not all dialogue utterances.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S11",
+      "name": "OpenAssistant OASST1",
+      "url": "https://huggingface.co/datasets/OpenAssistant/oasst1",
+      "kind": "human_assistant_conversation_trees",
+      "priority": "broad_chat_late",
+      "license_note": "Dataset card lists Apache 2.0.",
+      "adapter": "Select English, reviewed nondeleted messages and quality branches; split all paths from one message_tree_id together.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S12",
+      "name": "SmolTalk selected subsets",
+      "url": "https://huggingface.co/datasets/HuggingFaceTB/smoltalk",
+      "kind": "synthetic_instruction_data",
+      "priority": "broad_chat_late",
+      "license_note": "Newly produced subsets described in the card are Apache 2.0; imported components retain their own terms. Do not treat all as one license.",
+      "adapter": "Begin with smol-rewrite and smol-summarize; retain source text, audit outputs, and do not treat synthetic replies as a truth oracle.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S13",
+      "name": "CLUTRR",
+      "url": "https://github.com/facebookresearch/clutrr",
+      "kind": "relational_reasoning_dataset",
+      "priority": "excluded_from_default_pending_permission",
+      "license_note": "CC BY-NC 4.0; noncommercial restriction.",
+      "adapter": "Optional kinship-chain diagnostic only after permission review; no assumption that evaluation use is automatically exempt.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S14",
+      "name": "TinyStories",
+      "url": "https://huggingface.co/datasets/roneneldan/TinyStories",
+      "kind": "synthetic_story_text",
+      "priority": "optional_style_only",
+      "license_note": "Dataset card lists CDLA-Sharing 1.0.",
+      "adapter": "Optional later fluency input, not an oracle for consistent world state.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    },
+    {
+      "id": "S15",
+      "name": "SQuAD 2.0",
+      "url": "https://rajpurkar.github.io/SQuAD-explorer/",
+      "kind": "passage_question_answering",
+      "priority": "optional_evidence_bound_reading",
+      "license_note": "Dataset page lists CC BY-SA 4.0.",
+      "adapter": "Use supplied passages and unanswerable questions before broad factual chat; do not confuse passage support with world truth.",
+      "reviewed_on": "2026-09-22",
+      "pinned_revision": null,
+      "archive_sha256": null
+    }
+  ],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "grounding",
+      "sources": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "pilot_unit": "independent_world_episode",
+      "pilot_count": 5000,
+      "expansion_range": [
+        20000,
+        40000
+      ],
+      "gate": {
+        "minimum_accuracy_each_family": 0.99,
+        "families": [
+          "entity",
+          "attribute",
+          "location",
+          "role_reversal"
+        ]
+      }
+    },
+    {
+      "stage": 2,
+      "name": "individual_skills",
+      "sources": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "pilot_unit": "world_episode",
+      "pilot_count": 5000,
+      "expansion_range": [
+        40000,
+        80000
+      ],
+      "gate": {
+        "minimum_accuracy_each_operation": 0.99
+      }
+    },
+    {
+      "stage": 3,
+      "name": "shared_language_meanings",
+      "sources": [
+        "S1",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "pilot_unit": "atomic_phrase_example",
+      "pilot_count": 5000,
+      "expansion_range": [
+        20000,
+        40000
+      ],
+      "gate": {
+        "minimum_answer_accuracy": 0.98,
+        "minimum_paired_paraphrase_agreement": 0.98
+      }
+    },
+    {
+      "stage": 4,
+      "name": "composition",
+      "sources": [
+        "S1",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "pilot_unit": "world_query_episode",
+      "pilot_count": 5000,
+      "expansion_range": [
+        50000,
+        100000
+      ],
+      "gate": {
+        "minimum_accuracy_each_familiar_depth_holdout_family": 0.97,
+        "maximum_absolute_drop_vs_seen_family": 0.02,
+        "deeper_extrapolation_report_separately": true
+      }
+    },
+    {
+      "stage": 5,
+      "name": "change_and_discourse",
+      "sources": [
+        "S1",
+        "S6",
+        "S7",
+        "S9"
+      ],
+      "pilot_unit": "event_episode",
+      "pilot_count": 5000,
+      "immediate_experiment_count": 20000,
+      "expansion_range": [
+        50000,
+        100000
+      ],
+      "gate": {
+        "minimum_changed_fact_accuracy": 0.98,
+        "minimum_unchanged_fact_accuracy": 0.98,
+        "minimum_whole_short_trajectory_accuracy": 0.95,
+        "minimum_true_false_unknown_macro_f1": 0.98
+      }
+    },
+    {
+      "stage": 6,
+      "name": "grounded_dialogue_then_broad_chat",
+      "sources": [
+        "S6",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "optional_sources": [
+        "S15"
+      ],
+      "pilot_unit": "dialogue_or_conversation_path",
+      "grounded_dialogue_range": [
+        5000,
+        10000
+      ],
+      "broad_chat_initial_path_range": [
+        5000,
+        20000
+      ],
+      "gate": {
+        "minimum_controlled_task_completion": 0.95,
+        "minimum_clarification_decision_accuracy": 0.95,
+        "maximum_absolute_regression_on_prior_gates": 0.01
+      }
+    }
+  ],
+  "default_pre_chat_learning_budget": {
+    "current_stage": 0.6,
+    "earlier_skills": 0.3,
+    "training_development_counterexamples": 0.1,
+    "unit": "measured learning events or bytes/tokens; record the selected unit"
+  },
+  "broad_chat_fraction_progression": [
+    0.1,
+    0.25,
+    0.5
+  ],
+  "evaluation": {
+    "preferred_independent_groups_per_major_synthetic_family": 1000,
+    "preferred_training_seeds": 3,
+    "cluster_confidence_intervals_by": "base_world_or_trajectory",
+    "keep_official_and_custom_scores_separate": true,
+    "test_failures_may_enter_replay": false,
+    "freeze_user_reported_regression_suites": [
+      2340,
+      300
+    ]
+  },
+  "event_grounding_experiment": {
+    "arms": [
+      "annotated_baseline",
+      "observations_and_sparse_questions",
+      "annotation_withdrawal"
+    ],
+    "direct_state_target_coverage_progression": [
+      1.0,
+      0.25,
+      0.05,
+      0.0
+    ],
+    "zero_state_labels_means_zero_supervision": false,
+    "require_new_relation_or_cold_start_check": true,
+    "prediction_scored_before_next_observation": true,
+    "matched_observable_streams": true
+  },
+  "prohibited_learner_inputs": [
+    "gold post-event state at evaluation",
+    "gold query program",
+    "supporting-fact indices",
+    "oracle walkthrough or plan",
+    "future observations",
+    "gold next dialogue action"
+  ],
+  "notes": [
+    "This manifest is configuration guidance, not an executable training pipeline.",
+    "Pin revisions and validate license coverage and oracle correctness before ingestion.",
+    "Natural-language and text-rendered adaptations are not official visual/embodied benchmark scores.",
+    "Source licenses describe the reviewed scope, not blanket commercial-use clearance."
+  ]
+}
